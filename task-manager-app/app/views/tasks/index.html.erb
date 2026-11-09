@@ -1,0 +1,44 @@
+<section class="stats">
+  <div class="stat">
+    <span class="stat-number"><%= @counts[:total] %></span>
+    <span class="stat-label">Total</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number pending"><%= @counts[:pending] %></span>
+    <span class="stat-label">Pending</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number completed"><%= @counts[:completed] %></span>
+    <span class="stat-label">Completed</span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Add a new task</h2>
+  <%= render "form", task: @task, submit_label: "Add task" %>
+</section>
+
+<section>
+  <div class="list-header">
+    <h2>Your tasks</h2>
+    <nav class="filters">
+      <%= link_to "All", tasks_path, class: filter_class(@status, nil) %>
+      <%= link_to "Pending", tasks_path(status: "Pending"), class: filter_class(@status, "Pending") %>
+      <%= link_to "Completed", tasks_path(status: "Completed"), class: filter_class(@status, "Completed") %>
+    </nav>
+  </div>
+
+  <% if @tasks.any? %>
+    <ul class="task-list">
+      <%= render partial: "task", collection: @tasks %>
+    </ul>
+  <% else %>
+    <p class="empty">
+      <% if @status %>
+        No <%= @status.downcase %> tasks.
+      <% else %>
+        No tasks yet. Add your first one above.
+      <% end %>
+    </p>
+  <% end %>
+</section>

@@ -1,0 +1,38 @@
+<section class="card">
+  <div class="task-top">
+    <h2 class="task-title"><%= @task.title %></h2>
+    <span class="badge <%= "completed" if @task.completed? %>"><%= @task.status %></span>
+  </div>
+
+  <% if @task.description.present? %>
+    <p class="task-desc"><%= @task.description %></p>
+  <% else %>
+    <p class="task-desc">No description.</p>
+  <% end %>
+
+  <dl class="details">
+    <dt>ID</dt>
+    <dd><%= @task.id %></dd>
+    <dt>Created</dt>
+    <dd><%= format_time(@task.created_at) %></dd>
+    <dt>Last updated</dt>
+    <dd><%= format_time(@task.updated_at) %></dd>
+  </dl>
+
+  <div class="task-actions">
+    <%= button_to (@task.completed? ? "Mark as Pending" : "Mark as Completed"),
+                  toggle_task_path(@task),
+                  method: :patch,
+                  class: "btn btn-small",
+                  form_class: "inline-form" %>
+    <%= link_to "Edit", edit_task_path(@task), class: "btn btn-small" %>
+    <%= button_to "Delete",
+                  task_path(@task),
+                  method: :delete,
+                  class: "btn btn-small btn-danger",
+                  form_class: "inline-form",
+                  form: { "data-confirm" => "Delete the task \"#{@task.title}\"?" } %>
+  </div>
+</section>
+
+<p><%= link_to "← Back to all tasks", tasks_path %></p>

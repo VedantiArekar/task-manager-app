@@ -1,0 +1,6 @@
+<section class="card">
+  <h2>Edit task #<%= @task.id %></h2>
+  <%= render "form", task: @task, submit_label: "Save changes" %>
+</section>
+
+<p><%= link_to "← Back to all tasks", tasks_path %></p>

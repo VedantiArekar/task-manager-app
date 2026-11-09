@@ -1,0 +1,6 @@
+<section class="card">
+  <h2>Add a new task</h2>
+  <%= render "form", task: @task, submit_label: "Add task" %>
+</section>
+
+<p><%= link_to "← Back to all tasks", tasks_path %></p>

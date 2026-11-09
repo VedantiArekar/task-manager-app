@@ -1,0 +1,32 @@
+# PostgreSQL configuration.
+#
+# Preferred: set the DATABASE_URL environment variable, for example
+#   postgresql://USER:PASSWORD@HOST:5432/DBNAME
+# DATABASE_URL always takes precedence over the values below.
+#
+# Fallback: the DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD
+# environment variables. No credentials are stored in this file.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  connect_timeout: 5
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("DB_NAME", "taskmanager") %>
+
+# The test database must be different from development!
+# Put a separate DATABASE_URL in a .env.test file (see .env.test.example).
+test:
+  <<: *default
+  database: taskmanager_test
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("DB_NAME", "taskmanager") %>

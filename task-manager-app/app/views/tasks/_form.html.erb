@@ -1,0 +1,28 @@
+<%= form_with model: task do |form| %>
+  <% if task.errors.any? %>
+    <div class="message error" role="alert">
+      <strong>Please fix the following:</strong>
+      <ul class="error-list">
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.label :title, "Title" %>
+  <%= form.text_field :title, maxlength: 255, required: true, placeholder: "What needs to be done?" %>
+
+  <%= form.label :description, "Description" %>
+  <%= form.text_area :description, rows: 3, placeholder: "Add some details (optional)" %>
+
+  <%= form.label :status, "Status" %>
+  <%= form.select :status, Task::STATUSES %>
+
+  <div class="form-actions">
+    <%= form.submit submit_label, class: "btn btn-primary" %>
+    <% if task.persisted? %>
+      <%= link_to "Cancel", tasks_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+<% end %>

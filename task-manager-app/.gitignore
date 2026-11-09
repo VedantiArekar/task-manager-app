@@ -1,0 +1,26 @@
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.test.example
+
+# Rails secrets
+/config/master.key
+/config/credentials/*.key
+
+# Logs and temporary files
+/log/*
+/tmp/*
+
+# Dependencies
+/vendor/bundle/
+/node_modules/
+
+# Database backups
+*.sql
+*.dump
+*.bak
+
+# Docker image archives
+*.tar
+*.tar.gz
